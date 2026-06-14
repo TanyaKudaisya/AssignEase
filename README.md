@@ -57,6 +57,8 @@ AssignEase features a modern, responsive design with:
 
 ## 🚀 Installation
 
+### Local Development
+
 1. **Clone the repository**
    ```bash
    git clone https://github.com/TanyaKudaisya/AssignEase.git
@@ -101,6 +103,39 @@ AssignEase features a modern, responsive design with:
 8. **Access the application**
    - Open your browser and go to: `http://127.0.0.1:8000/`
    - Admin panel: `http://127.0.0.1:8000/admin/`
+
+### Deploy to Render
+
+1. **Fork or clone this repository**
+
+2. **Create a new Web Service on Render**
+   - Go to [Render Dashboard](https://dashboard.render.com/)
+   - Click "New +" and select "Web Service"
+   - Connect your GitHub repository
+
+3. **Configure the service**
+   - **Name**: assignease (or your preferred name)
+   - **Environment**: Python
+   - **Build Command**: `./build.sh`
+   - **Start Command**: `gunicorn assignease.wsgi:application`
+
+4. **Add Environment Variables** (in Render dashboard):
+   - `SECRET_KEY`: Generate a secure key (use Django's `get_random_secret_key()`)
+   - `DEBUG`: `False`
+   - `DATABASE_URL`: Will be auto-filled if you create a PostgreSQL database
+   - `RENDER_EXTERNAL_HOSTNAME`: Your Render app URL (e.g., `assignease.onrender.com`)
+
+5. **Create a PostgreSQL Database** (optional but recommended):
+   - In Render, create a new PostgreSQL database
+   - Link it to your web service
+   - The `DATABASE_URL` will be automatically set
+
+6. **Deploy**
+   - Click "Create Web Service"
+   - Render will automatically deploy your app
+   - First deployment takes 5-10 minutes
+
+Your app will be live at: `https://your-app-name.onrender.com`
 
 ## 👥 Default Login
 

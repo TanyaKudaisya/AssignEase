@@ -1,0 +1,20 @@
+databases:
+  - name: assignease_db
+    databaseName: assignease_db
+    user: assignease_user
+
+services:
+  - type: web
+    name: assignease
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn assignease.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: assignease_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
