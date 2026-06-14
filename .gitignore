@@ -91,6 +91,8 @@ staticfiles/
 # Documentation files (keep private)
 *.md
 !README.md
+!SETUP_INFO.md
+!DEPLOYMENT.md
 ARCHITECTURE_DIAGRAM.md
 CALENDAR_FEATURE.md
 CALENDAR_QUICK_START.md
