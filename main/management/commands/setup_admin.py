@@ -60,7 +60,7 @@ class Command(BaseCommand):
         # Create a sample department if none exist
         if not Department.objects.exists():
             dept = Department.objects.create(
-                department_id='CS',
+                department_id=101,  # Use numeric ID
                 name='Computer Science'
             )
             self.stdout.write(self.style.SUCCESS(

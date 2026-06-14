@@ -23,7 +23,7 @@ def create_initial_data(apps, schema_editor):
     # Create sample department
     if not Department.objects.exists():
         dept = Department.objects.create(
-            department_id='CS',
+            department_id=101,  # Use numeric ID
             name='Computer Science'
         )
         print(f'✅ Department created: {dept.name}')
@@ -72,7 +72,7 @@ def delete_initial_data(apps, schema_editor):
     Course.objects.filter(code='CS101').delete()
     Student.objects.filter(student_id='2001').delete()
     Faculty.objects.filter(faculty_id='1001').delete()
-    Department.objects.filter(department_id='CS').delete()
+    Department.objects.filter(department_id=101).delete()
     User.objects.filter(username='admin').delete()
 
 
