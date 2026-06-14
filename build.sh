@@ -2,10 +2,16 @@
 # exit on error
 set -o errexit
 
+echo "📦 Installing dependencies..."
 pip install -r requirements.txt
 
+echo "🎨 Collecting static files..."
 python manage.py collectstatic --no-input
+
+echo "🗄️ Running database migrations..."
 python manage.py migrate
 
-# Create admin user and sample data automatically (with reset to fix old data)
-python manage.py setup_admin --reset
+echo "👤 Creating admin user and sample data..."
+python manage.py setup_admin --reset || echo "⚠️ Setup admin failed, continuing..."
+
+echo "✅ Build complete!"
