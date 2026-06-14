@@ -47,14 +47,30 @@ def std_login(request):
             if form.is_valid():
                 id = form.cleaned_data['id']
                 password = form.cleaned_data['password']
+                
+                logger.info(f"Login attempt with ID: {id}")
 
-                if Student.objects.filter(student_id=id, password=password).exists():
+                # Check if student exists
+                student_exists = Student.objects.filter(student_id=id, password=password).exists()
+                logger.info(f"Student check for ID {id}: {student_exists}")
+                
+                # Check if faculty exists
+                faculty_exists = Faculty.objects.filter(faculty_id=id, password=password).exists()
+                logger.info(f"Faculty check for ID {id}: {faculty_exists}")
+
+                if student_exists:
                     request.session['student_id'] = id
+                    logger.info(f"Student {id} logged in successfully")
                     return redirect('myCourses')
-                elif Faculty.objects.filter(faculty_id=id, password=password).exists():
+                elif faculty_exists:
                     request.session['faculty_id'] = id
+                    logger.info(f"Faculty {id} logged in successfully")
                     return redirect('facultyCourses')
                 else:
+                    # Log what users exist in database for debugging
+                    student_count = Student.objects.count()
+                    faculty_count = Faculty.objects.count()
+                    logger.warning(f"Login failed for ID {id}. Database has {student_count} students and {faculty_count} faculty")
                     error_messages.append('Invalid login credentials.')
             else:
                 error_messages.append('Invalid form data.')
@@ -79,6 +95,26 @@ def std_login(request):
 def std_logout(request):
     request.session.flush()
     return redirect('std_login')
+
+
+# Debug endpoint to check database status (remove in production)
+def debug_db_status(request):
+    from django.http import JsonResponse
+    from main.models import Student, Faculty, Department, Course
+    
+    data = {
+        'students': list(Student.objects.values('student_id', 'name', 'department__name')),
+        'faculty': list(Faculty.objects.values('faculty_id', 'name', 'department__name')),
+        'departments': list(Department.objects.values('department_id', 'name')),
+        'courses': list(Course.objects.values('code', 'name')),
+        'counts': {
+            'students': Student.objects.count(),
+            'faculty': Faculty.objects.count(),
+            'departments': Department.objects.count(),
+            'courses': Course.objects.count(),
+        }
+    }
+    return JsonResponse(data, safe=False)
 
 
 # Display all courses (student view)

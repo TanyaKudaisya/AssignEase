@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.std_login, name='std_login'),
+    path('debug/db/', views.debug_db_status, name='debug_db'),  # Debug endpoint
     path('my/', views.myCourses, name='myCourses'),
     path('calendar/', views.calendar_view, name='calendar'),
     path('facultyCourses/', views.facultyCourses, name='facultyCourses'),
