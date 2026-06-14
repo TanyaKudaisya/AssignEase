@@ -50,7 +50,7 @@ def create_initial_data(apps, schema_editor):
         
         # Create course
         course = Course.objects.create(
-            code='CS101',
+            code=101,  # Use numeric course code
             name='Introduction to Computer Science',
             department=dept,
             faculty=faculty,
@@ -69,7 +69,7 @@ def delete_initial_data(apps, schema_editor):
     Student = apps.get_model('main', 'Student')
     Course = apps.get_model('main', 'Course')
     
-    Course.objects.filter(code='CS101').delete()
+    Course.objects.filter(code=101).delete()
     Student.objects.filter(student_id='2001').delete()
     Faculty.objects.filter(faculty_id='1001').delete()
     Department.objects.filter(department_id=101).delete()

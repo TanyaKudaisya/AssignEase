@@ -99,7 +99,7 @@ class Command(BaseCommand):
 
             # Create a sample course
             course = Course.objects.create(
-                code='CS101',
+                code=101,  # Use numeric course code
                 name='Introduction to Computer Science',
                 department=dept,
                 faculty=faculty,
@@ -111,7 +111,7 @@ class Command(BaseCommand):
                 f'✅ Created sample course: {course.name}'
             ))
             self.stdout.write(self.style.SUCCESS(
-                f'   Course Code: CS101, Student Key: 1234'
+                f'   Course Code: 101, Student Key: 1234'
             ))
 
             self.stdout.write(self.style.SUCCESS(
