@@ -36,25 +36,32 @@ def is_faculty_authorised(request, code):
 
 # Custom Login page for both student and faculty
 def std_login(request):
+    import logging
+    logger = logging.getLogger(__name__)
     error_messages = []
 
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        try:
+            form = LoginForm(request.POST)
 
-        if form.is_valid():
-            id = form.cleaned_data['id']
-            password = form.cleaned_data['password']
+            if form.is_valid():
+                id = form.cleaned_data['id']
+                password = form.cleaned_data['password']
 
-            if Student.objects.filter(student_id=id, password=password).exists():
-                request.session['student_id'] = id
-                return redirect('myCourses')
-            elif Faculty.objects.filter(faculty_id=id, password=password).exists():
-                request.session['faculty_id'] = id
-                return redirect('facultyCourses')
+                if Student.objects.filter(student_id=id, password=password).exists():
+                    request.session['student_id'] = id
+                    return redirect('myCourses')
+                elif Faculty.objects.filter(faculty_id=id, password=password).exists():
+                    request.session['faculty_id'] = id
+                    return redirect('facultyCourses')
+                else:
+                    error_messages.append('Invalid login credentials.')
             else:
-                error_messages.append('Invalid login credentials.')
-        else:
-            error_messages.append('Invalid form data.')
+                error_messages.append('Invalid form data.')
+                logger.error(f"Form validation errors: {form.errors}")
+        except Exception as e:
+            logger.error(f"Login error: {str(e)}", exc_info=True)
+            error_messages.append('An error occurred. Please try again.')
     else:
         form = LoginForm()
 
