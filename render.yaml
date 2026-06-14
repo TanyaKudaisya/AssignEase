@@ -2,7 +2,7 @@ services:
   - type: web
     name: assignease
     runtime: python
-    buildCommand: "./build.sh"
+    buildCommand: "chmod +x build.sh && ./build.sh"
     startCommand: "gunicorn assignease.wsgi:application"
     envVars:
       - key: DATABASE_URL
