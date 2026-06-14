@@ -21,11 +21,11 @@ After deployment completes, you can login with these accounts:
 - **Password:** `admin123`
 
 ### Faculty Login
-- **Faculty ID:** `FAC001`
+- **Faculty ID:** `1001`
 - **Password:** `faculty123`
 
 ### Student Login
-- **Student ID:** `STU001`
+- **Student ID:** `2001`
 - **Password:** `student123`
 
 ⚠️ **SECURITY:** Change these passwords immediately in production!
@@ -47,8 +47,8 @@ After deployment completes, you can login with these accounts:
 
 ### 3. Delete Sample Data (Optional)
 If you don't need the sample accounts:
-- Delete FAC001 (faculty)
-- Delete STU001 (student)
+- Delete faculty with ID 1001
+- Delete student with ID 2001
 - Delete CS101 (course)
 - Keep Computer Science department or delete if not needed
 

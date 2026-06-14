@@ -50,9 +50,9 @@ class Command(BaseCommand):
                 f'✅ Created sample department: {dept.name}'
             ))
 
-            # Create a sample faculty
+            # Create a sample faculty with NUMERIC ID
             faculty = Faculty.objects.create(
-                faculty_id='FAC001',
+                faculty_id='1001',
                 name='Dr. John Smith',
                 department=dept,
                 email='faculty@example.com',
@@ -62,12 +62,12 @@ class Command(BaseCommand):
                 f'✅ Created sample faculty: {faculty.name}'
             ))
             self.stdout.write(self.style.SUCCESS(
-                f'   Faculty ID: FAC001, Password: faculty123'
+                f'   Faculty ID: 1001, Password: faculty123'
             ))
 
-            # Create a sample student
+            # Create a sample student with NUMERIC ID
             student = Student.objects.create(
-                student_id='STU001',
+                student_id='2001',
                 name='Jane Doe',
                 department=dept,
                 email='student@example.com',
@@ -77,7 +77,7 @@ class Command(BaseCommand):
                 f'✅ Created sample student: {student.name}'
             ))
             self.stdout.write(self.style.SUCCESS(
-                f'   Student ID: STU001, Password: student123'
+                f'   Student ID: 2001, Password: student123'
             ))
 
             # Create a sample course
@@ -104,10 +104,10 @@ class Command(BaseCommand):
                 f'   1. Login to admin panel: /admin'
             ))
             self.stdout.write(self.style.SUCCESS(
-                f'   2. Login as faculty: FAC001 / faculty123'
+                f'   2. Login as faculty: 1001 / faculty123'
             ))
             self.stdout.write(self.style.SUCCESS(
-                f'   3. Login as student: STU001 / student123'
+                f'   3. Login as student: 2001 / student123'
             ))
         else:
             self.stdout.write(self.style.SUCCESS(
