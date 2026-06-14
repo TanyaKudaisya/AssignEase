@@ -1,5 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* Override Bootstrap colors */
+:root {
+  --bs-primary: #2ebdb4 !important;
+  --bs-primary-rgb: 46, 189, 180 !important;
+  --bs-secondary: #051622 !important;
+  --bs-secondary-rgb: 5, 22, 34 !important;
+  --bs-dark: #051622 !important;
+  --bs-dark-rgb: 5, 22, 34 !important;
+  --bs-blue: #2ebdb4 !important;
+  --bs-link-color: #2ebdb4 !important;
+  --bs-link-hover-color: #26a69a !important;
+}
+
+/* Custom color variables */
+:root {
+  --primary-dark: #051622;
+  --primary-teal: #2ebdb4;
+  --primary-white: #ffffff;
+  --dark-blue-alt: #062f4e;
+}
 
 * {
   font-family: "Inter", sans-serif;
@@ -9,147 +29,622 @@
 body {
   margin: 0;
   padding: 0;
+  background: #f5f7fa;
+  min-height: 100vh;
 }
+
 html {
   scroll-behavior: smooth;
 }
 
-.timer {
-  font-family: "IBM Plex Sans", sans-serif;
+/* Remove any default spacing after navbar */
+.navbar + * {
+  margin-top: 0 !important;
+  padding-top: 1rem;
 }
 
+/* ===== BUTTON STYLES ===== */
 .btn {
-  border-radius: 3px !important;
+  border-radius: 8px !important;
+  padding: 12px 28px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  letter-spacing: 0.3px;
+  font-size: 0.925rem !important;
 }
 
 .btn-primary {
-  background-color: #0b6ab8 !important;
-  border-color: #0b6ab8 !important;
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(46, 189, 180, 0.3) !important;
+  border-color: var(--primary-teal) !important;
 }
 
 .btn-primary:hover,
-.btn-primary:active,
-.btn-primary:visited {
-  background-color: #0e5ea0 !important;
-  border-color: #0e5ea0 !important;
+.btn-primary:focus,
+.btn-primary:active {
+  background: linear-gradient(135deg, #26a69a 0%, var(--primary-teal) 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(46, 189, 180, 0.4) !important;
+  border-color: var(--primary-teal) !important;
 }
 
+.btn-secondary {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark-blue-alt) 100%) !important;
+  color: white !important;
+  border-color: var(--primary-dark) !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background: linear-gradient(135deg, var(--dark-blue-alt) 0%, var(--primary-dark) 100%) !important;
+  transform: translateY(-2px) !important;
+  border-color: var(--primary-dark) !important;
+}
+
+.btn-outline-dark {
+  border: 2px solid var(--primary-dark) !important;
+  color: var(--primary-dark) !important;
+  background: white !important;
+}
+
+.btn-outline-dark:hover,
+.btn-outline-dark:focus,
+.btn-outline-dark:active {
+  background: var(--primary-dark) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(5, 22, 34, 0.3) !important;
+}
+
+.btn-outline-light {
+  border: 2px solid white !important;
+  color: white !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:focus,
+.btn-outline-light:active {
+  background: white !important;
+  color: var(--primary-dark) !important;
+}
+
+/* Override any Bootstrap button classes */
+.btn-info {
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%) !important;
+  color: white !important;
+  border-color: var(--primary-teal) !important;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+  background: linear-gradient(135deg, #26a69a 0%, var(--primary-teal) 100%) !important;
+  border-color: var(--primary-teal) !important;
+}
+
+/* ===== NAVBAR ===== */
 .navbar-mod {
-  background-color: rgb(10, 10, 48);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark-blue-alt) 100%);
+  color: white !important;
+  box-shadow: 0 4px 16px rgba(5, 22, 34, 0.2);
+  padding: 1rem 0;
+}
+
+.navbar-mod .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 10px 16px !important;
+  border-radius: 6px;
+  margin: 0 4px;
+}
+
+.navbar-mod .nav-link:hover {
+  background: rgba(46, 189, 180, 0.15);
+  color: var(--primary-teal) !important;
+}
+
+.navbar-brand {
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  letter-spacing: 0.5px;
   color: white !important;
 }
-.liner-gradient-sky {
-  background: #1488cc;
-  background: -webkit-linear-gradient(to right, #2b32b2, #1488cc);
-  background: linear-gradient(to right, #2b32b2, #1488cc);
-}
-.liner-gradient-margo {
-  background: #f8eecc;
-  background: -webkit-linear-gradient(to right, #ffffff, #fff5d6);
-  background: linear-gradient(to right, #ffffff, #fff5d6);
-}
 
-.login {
-  min-height: 100vh;
-}
-
-.login-heading {
-  font-weight: 300;
-}
-
-a {
-  text-decoration: none !important;
-}
-
-.btn-login {
-  font-size: 0.9rem;
-  letter-spacing: 0.05rem;
-  padding: 0.75rem 1rem;
-}
-
+/* ===== CARD STYLES ===== */
 .card-header,
 .card-footer {
-  background-color: rgb(10, 10, 48);
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%);
+  color: white !important;
+  font-weight: 600;
+  padding: 1.25rem 1.5rem;
+  border: none !important;
 }
 
 .cd {
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
-    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
-    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-  transition: 0.3s;
+  background: white;
+  border-radius: 16px !important;
+  border: none !important;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(5, 22, 34, 0.08);
+  position: relative;
+}
+
+.cd::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-teal) 0%, #26a69a 100%);
 }
 
 .cd:hover {
-  transform: scale(1.1);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(46, 189, 180, 0.2);
 }
 
+.cd .card-body {
+  padding: 2rem;
+}
+
+.cd .card-title {
+  color: var(--primary-dark);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+/* ===== UTILITY CLASSES ===== */
 .container {
-  margin-top: 1.5rem;
+  margin-top: 0 !important;
+  padding-top: 1rem;
 }
 
-.container-announcement {
-  max-width: 40vw;
-  min-width: 380px;
+.margin-mod {
+  padding-top: 1.5rem !important;
 }
 
 .profile {
   width: 50%;
   min-width: fit-content;
   height: 40vh;
-  border-radius: 1.2rem;
-}
-
-.margin-mod {
-  padding-top: 4.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(5, 22, 34, 0.1);
 }
 
 .form-border {
-  border: 2px solid rgb(10, 10, 48) !important;
+  border: 2px solid var(--primary-teal) !important;
+  border-radius: 8px !important;
 }
 
 .shadow {
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px !important;
+  box-shadow: 0 4px 16px rgba(5, 22, 34, 0.08) !important;
 }
+
 .shadow-sm {
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
+  box-shadow: 0 2px 8px rgba(5, 22, 34, 0.06) !important;
+  border-radius: 12px;
+  background: white;
 }
+
 .shadow-lg {
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
-    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px !important;
+  box-shadow: 0 8px 32px rgba(5, 22, 34, 0.12) !important;
 }
+
 .login-shadow {
-  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  box-shadow: 0 8px 24px rgba(5, 22, 34, 0.1);
 }
 
 .searchbar {
-  border-radius: 3px;
-  border: none !important;
-}
-td,
-th {
-  vertical-align: middle !important;
-}
-.searchbar:focus {
-  border: none !important;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0 !important;
+  padding: 10px 16px;
+  transition: all 0.3s ease;
 }
 
-.searchbar:hover {
-  border: none !important;
+.searchbar:focus {
+  border-color: var(--primary-teal) !important;
+  box-shadow: 0 0 0 3px rgba(46, 189, 180, 0.1) !important;
+  outline: none;
 }
+
+td, th {
+  vertical-align: middle !important;
+}
+
 .margin-p-bottom {
   margin-bottom: 0.5rem !important;
 }
+
 .margin-p-top {
   margin-top: 0.5rem !important;
 }
+
 .inline-icons {
-  vertical-align: bottom;
+  vertical-align: middle;
 }
-.gradBg {
-  background: linear-gradient(
-    0deg,
-    rgba(255, 247, 233, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  color: #482307;
+
+/* Override Bootstrap color utilities */
+.bg-primary {
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%) !important;
+}
+
+.bg-secondary {
+  background: var(--primary-dark) !important;
+}
+
+.bg-dark {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark-blue-alt) 100%) !important;
+  color: white !important;
+}
+
+.bg-info {
+  background: var(--primary-teal) !important;
+}
+
+.bg-light {
+  background: #f8f9fa !important;
+}
+
+.text-primary {
+  color: var(--primary-teal) !important;
+}
+
+.text-secondary {
+  color: #64748b !important;
+}
+
+.text-dark {
+  color: var(--primary-dark) !important;
+}
+
+.text-info {
+  color: var(--primary-teal) !important;
+}
+
+.text-light {
+  color: white !important;
+}
+
+.border-primary {
+  border-color: var(--primary-teal) !important;
+}
+
+.border-secondary {
+  border-color: var(--primary-dark) !important;
+}
+
+.border-dark {
+  border-color: var(--primary-dark) !important;
+}
+
+.border-info {
+  border-color: var(--primary-teal) !important;
+}
+
+/* Alert overrides */
+.alert-primary {
+  background: rgba(46, 189, 180, 0.1) !important;
+  border-color: var(--primary-teal) !important;
+  color: var(--primary-dark) !important;
+}
+
+.alert-info {
+  background: rgba(46, 189, 180, 0.1) !important;
+  border-color: var(--primary-teal) !important;
+  color: var(--primary-dark) !important;
+}
+
+.alert-success {
+  background: rgba(34, 197, 94, 0.1) !important;
+  border-color: #22c55e !important;
+  color: var(--primary-dark) !important;
+}
+
+.alert-danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: #ef4444 !important;
+  color: #991b1b !important;
+}
+
+/* Badge overrides */
+.badge-primary {
+  background: var(--primary-teal) !important;
+}
+
+.badge-info {
+  background: var(--primary-teal) !important;
+}
+
+/* Link overrides */
+a {
+  color: var(--primary-teal) !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #26a69a !important;
+}
+
+.link-primary {
+  color: var(--primary-teal) !important;
+}
+
+.link-primary:hover {
+  color: #26a69a !important;
+}
+
+/* Override any inline rgb(10, 10, 48) - old blue color */
+[style*="rgb(10, 10, 48)"] {
+  color: var(--primary-dark) !important;
+}
+
+/* Success button override */
+.btn-success {
+  background: #22c55e !important;
+  border-color: #22c55e !important;
+  color: white !important;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+  background: #16a34a !important;
+  border-color: #16a34a !important;
+}
+
+/* Danger/Delete button override */
+.btn-danger {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: white !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+  background: #dc2626 !important;
+  border-color: #dc2626 !important;
+}
+
+/* Warning button override */
+.btn-warning {
+  background: #f59e0b !important;
+  border-color: #f59e0b !important;
+  color: white !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+  background: #d97706 !important;
+  border-color: #d97706 !important;
+}
+
+/* Small button variants */
+.btn-sm.btn-primary {
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%) !important;
+  color: white !important;
+  border-color: var(--primary-teal) !important;
+  padding: 8px 16px !important;
+}
+
+.btn-lg.btn-primary {
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%) !important;
+  color: white !important;
+  border-color: var(--primary-teal) !important;
+}
+
+/* Outline variants */
+.btn-outline-primary {
+  border: 2px solid var(--primary-teal) !important;
+  color: var(--primary-teal) !important;
+  background: transparent !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background: var(--primary-teal) !important;
+  color: white !important;
+}
+
+.btn-outline-secondary {
+  border: 2px solid var(--primary-dark) !important;
+  color: var(--primary-dark) !important;
+  background: transparent !important;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:active {
+  background: var(--primary-dark) !important;
+  color: white !important;
+}
+
+.btn-outline-info {
+  border: 2px solid var(--primary-teal) !important;
+  color: var(--primary-teal) !important;
+  background: transparent !important;
+}
+
+.btn-outline-info:hover,
+.btn-outline-info:focus,
+.btn-outline-info:active {
+  background: var(--primary-teal) !important;
+  color: white !important;
+}
+
+/* Override any button that might still be blue */
+button[type="submit"]:not(.btn-success):not(.btn-danger):not(.btn-warning) {
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%) !important;
+  color: white !important;
+  border-color: var(--primary-teal) !important;
+}
+
+button[type="submit"]:not(.btn-success):not(.btn-danger):not(.btn-warning):hover {
+  background: linear-gradient(135deg, #26a69a 0%, var(--primary-teal) 100%) !important;
+}
+
+/* Specific class overrides for any missed buttons */
+.btn.btn-primary,
+button.btn-primary,
+a.btn-primary,
+input[type="submit"].btn-primary {
+  background: linear-gradient(135deg, var(--primary-teal) 0%, #26a69a 100%) !important;
+  border-color: var(--primary-teal) !important;
+  color: white !important;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+button.btn-primary:hover,
+button.btn-primary:focus,
+button.btn-primary:active,
+a.btn-primary:hover,
+a.btn-primary:focus,
+a.btn-primary:active {
+  background: linear-gradient(135deg, #26a69a 0%, var(--primary-teal) 100%) !important;
+  border-color: var(--primary-teal) !important;
+  color: white !important;
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 0;
+}
+
+.breadcrumb-item {
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+.breadcrumb-item.active {
+  color: var(--primary-teal);
+  font-weight: 600;
+}
+
+.breadcrumb-item a {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+  color: var(--primary-teal);
+}
+
+/* ===== FORM STYLES ===== */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary-teal) !important;
+  box-shadow: 0 0 0 3px rgba(46, 189, 180, 0.1) !important;
+  outline: none;
+}
+
+/* ===== TABLE STYLES ===== */
+table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+thead {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark-blue-alt) 100%);
+  color: white;
+}
+
+thead th {
+  font-weight: 600;
+  padding: 1rem;
+  border: none;
+}
+
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(46, 189, 180, 0.05);
+}
+
+tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* ===== LOGIN STYLES ===== */
+.login {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark-blue-alt) 100%);
+}
+
+.login-heading {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .cd {
+    width: 100% !important;
+    margin: 1rem 0;
+  }
+  
+  .navbar-mod .nav-link {
+    margin: 4px 0;
+  }
+  
+  .btn {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-teal);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #26a69a;
 }

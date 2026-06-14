@@ -43,6 +43,10 @@
                         data-bs-placement="bottom" title="Show all courses">Courses</a>
                   </li>
                   <li class="nav-item">
+                     <a class="nav-link active fw-bold" href="{% url 'calendar' %}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="View assignment calendar">Calendar</a>
+                  </li>
+                  <li class="nav-item">
                      <a class="nav-link active fw-bold" href="{% url 'std_logout' %}" data-bs-toggle="tooltip"
                         data-bs-placement="bottom" title="Log out">Log out</a>
                   </li>
@@ -61,8 +65,10 @@
          </div>
       </nav>
       <!-- Navbar Ends -->
-      {% block  content %}
-      {% endblock  %}
+      <div class="container" style="margin-top: 0 !important; padding-top: 1rem;">
+         {% block  content %}
+         {% endblock  %}
+      </div>
       <script src=" {% static 'js/bootstrap.bundle.min.js' %} "></script>
    </body>
 </html>

@@ -17,12 +17,12 @@
 <div class=" container shadow-sm">
    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb p-3">
-         <li class="breadcrumb-item fw-bold"><a style="color: rgb(10, 10, 48)" href="{% url 'facultyCourses' %}">My
+         <li class="breadcrumb-item fw-bold"><a style="color: var(--primary-dark)" href="{% url 'facultyCourses' %}">My
             Courses</a>
          </li>
-         <li class="breadcrumb-item fw-bold"><a style="color: rgb(10, 10, 48)"
+         <li class="breadcrumb-item fw-bold"><a style="color: var(--primary-dark)"
             href="{% url 'faculty' course.code %}">{{ course.name }}</a></li>
-         <li class="breadcrumb-item fw-bold"><a style="color: rgb(10, 10, 48)"
+         <li class="breadcrumb-item fw-bold"><a style="color: var(--primary-dark)"
             href="{% url 'allQuizzes' course.code %}">Quizzes</a></li>
          <li class="breadcrumb-item active animate__animated animate__backInRight" aria-current="page">
             {{quiz.title}}
@@ -79,7 +79,7 @@
 {% else %}
 <div class="d-flex justify-content-center my-3">
    <form method="post" action=" {% url 'quizSummary' course.code quiz.id %} ">{% csrf_token %}
-      <button class="btn btn-sm btn-primary" type="submit"> <span class="px-1">Publish marks</span> </button>
+      <button class="btn btn-sm btn-primary" type="submit" style="background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%) !important; border-color: #2ebdb4 !important; color: white !important;"> <span class="px-1">Publish marks</span> </button>
    </form>
 </div>
 {% endif %}
@@ -156,7 +156,7 @@
                </div>
             </div>
             {% if question.explanation %}
-            <div class="mt-3 bg-info bg-opacity-25 py-2 border-start border-3 border-info rounded" style="font-size:smaller">
+            <div class="mt-3 bg-opacity-25 py-2 border-start border-3 rounded" style="font-size:smaller; background: rgba(46, 189, 180, 0.25) !important; border-color: var(--primary-teal) !important;">
                <span class="fw-bold px-2">Explanation : </span>{{question.explanation}}
             </div>
             {% endif %}
@@ -179,10 +179,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
    var color = [
-   '#FFCD56',
-   '#36A2EB',
+   '#f1d79b',
+   '#2ebdb4',
    '#FF4069',
-   '#2CDEDB',
+   '#26a69a',
    ]
    {% for question in questions %}
     var data{{question.id}} = {
@@ -197,7 +197,7 @@
             backgroundColor: color,
             borderColor: color,
             borderWidth: 1,
-            hoverBorderColor: 'deepskyblue',
+            hoverBorderColor: '#2ebdb4',
             hoverBorderWidth: 1,
             hoverBorderRadius: 5,
             hoverBorderDash: [5, 5],

@@ -1,0 +1,182 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Calendar | AssignEase {% endblock title %}
+{% block profile %}
+{% url 'profile' student.student_id %}
+{% endblock %}
+{% block user %}
+{{student.name}}
+{% endblock user %}
+{% block allCourses %}
+{% url 'courses' %}
+{% endblock%}
+{% block courses %}
+{% url 'myCourses' %}
+{% endblock %}
+
+{% block content %}
+<div class="container margin-mod">
+   <div class="container shadow-sm mb-4">
+      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+         <ol class="breadcrumb p-3 mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'myCourses' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Assignment Calendar</li>
+         </ol>
+      </nav>
+   </div>
+
+   <!-- FullCalendar Container -->
+   <div id="calendar"></div>
+</div>
+
+<!-- FullCalendar CSS -->
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css' rel='stylesheet' />
+
+<!-- FullCalendar JS -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+<style>
+   /* FullCalendar Custom Styling */
+   #calendar {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(5, 22, 34, 0.1);
+   }
+
+   .fc {
+      font-family: 'Inter', sans-serif;
+   }
+
+   .fc .fc-button-primary {
+      background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+   }
+
+   .fc .fc-button-primary:hover {
+      background: linear-gradient(135deg, #26a69a 0%, #2ebdb4 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(46, 189, 180, 0.4);
+   }
+
+   .fc .fc-button-primary:not(:disabled):active,
+   .fc .fc-button-primary:not(:disabled).fc-button-active {
+      background: linear-gradient(135deg, #26a69a 0%, #2ebdb4 100%);
+   }
+
+   .fc-theme-standard .fc-scrollgrid {
+      border-color: #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+   }
+
+   .fc .fc-col-header-cell {
+      background: linear-gradient(135deg, #051622 0%, #062f4e 100%);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 1rem;
+      border: none;
+   }
+
+   .fc .fc-daygrid-day {
+      transition: all 0.3s ease;
+   }
+
+   .fc .fc-daygrid-day:hover {
+      background: rgba(46, 189, 180, 0.05);
+   }
+
+   .fc .fc-daygrid-day-number {
+      color: #051622;
+      font-weight: 600;
+      padding: 8px;
+   }
+
+   .fc .fc-daygrid-day.fc-day-today {
+      background: rgba(46, 189, 180, 0.1) !important;
+   }
+
+   .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+      background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%);
+      color: white;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-weight: 700;
+   }
+
+   .fc-event {
+      background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%);
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+   }
+
+   .fc-event:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(46, 189, 180, 0.4);
+   }
+
+   .fc .fc-toolbar-title {
+      color: #051622;
+      font-weight: 700;
+      font-size: 1.75rem;
+   }
+
+   .fc-h-event {
+      border-left: 4px solid #051622;
+   }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+   var calendarEl = document.getElementById('calendar');
+   
+   // Prepare events from Django data
+   var events = [
+      {% for course in courses %}
+         {% for assignment in course.assignment_set.all %}
+            {
+               title: '{{ assignment.title|escapejs }}',
+               start: '{{ assignment.deadline|date:"Y-m-d" }}',
+               description: '{{ course.code|escapejs }} - {{ course.name|escapejs }}',
+               color: '#2ebdb4',
+               allDay: true
+            },
+         {% endfor %}
+      {% endfor %}
+   ];
+
+   var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      headerToolbar: {
+         left: 'prev,next today',
+         center: 'title',
+         right: ''
+      },
+      events: events,
+      eventClick: function(info) {
+         alert('Assignment: ' + info.event.title + '\nCourse: ' + info.event.extendedProps.description + '\nDue: ' + info.event.start.toLocaleDateString());
+      },
+      height: 'auto',
+      aspectRatio: 1.8,
+      eventDisplay: 'block',
+      displayEventTime: false,
+      eventTextColor: '#ffffff',
+      dayMaxEvents: 3
+   });
+
+   calendar.render();
+});
+</script>
+{% endblock %}

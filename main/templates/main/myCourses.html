@@ -1,5 +1,5 @@
 {% extends 'index.html' %}
-{% block title %}Dashboard | eLMS {% endblock title %}
+{% block title %}Dashboard | AssignEase {% endblock title %}
 {% block profile %}
 {% url 'profile' student.student_id %}
 {% endblock %}
@@ -13,44 +13,67 @@
 {% url 'myCourses' %}
 {% endblock %}
 {% block content %}
-<div>
-   <!--navigation links-->
+<div style="min-height: 100vh; padding: 2rem 0;">
    <div class="container">
-      <div class="container shadow-sm">
-         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-            <ol class="breadcrumb p-3">
-               <li class="breadcrumb-item active" aria-current="page">My courses</li>
+      <!-- Breadcrumb -->
+      <div class="shadow-sm mb-4">
+         <nav style="--bs-breadcrumb-divider: '›';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item active" aria-current="page">My Courses</li>
             </ol>
          </nav>
       </div>
+
       {% if courses %}
-      <!-- Course container -->
-      <div class="card_primary d-flex justify-content-center flex-wrap">
+      <!-- Course Grid -->
+      <div class="row g-4">
          {% for courses in courses %}
-         <!-- individual course starts -->
-         <div class="cd card text-center my-4 mx-4" style="width: 30rem !important;">
-            <div class="card-header text-light fw-bold">
-               Dept. of {{courses.department}}
-            </div>
-            <div class="card-body">
-               <h5 class="card-title fw-bold"> {{courses.department}}-{{courses.code}} : {{courses.name}}</h5>
-               <a href="{% url 'course' courses.code %}" class="btn btn-outline-dark px-5">Enter</a>
-            </div>
-            <div class="card-footer text-light fw-bold">
-               {% if courses.faculty %}
-               Course Teacher : {{ courses.faculty.name}}
-               {% else %}
-               Teacher not assigned yet
-               {% endif %}
+         <div class="col-md-6 col-lg-4">
+            <div class="cd card h-100">
+               <div class="card-header">
+                  <div style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
+                     {{courses.department}}
+                  </div>
+               </div>
+               <div class="card-body d-flex flex-column">
+                  <div class="mb-3">
+                     <span style="background: rgba(46, 189, 180, 0.1); color: var(--primary-teal); padding: 0.375rem 0.75rem; border-radius: 6px; font-weight: 700; font-size: 0.875rem;">
+                        {{courses.code}}
+                     </span>
+                  </div>
+                  <h5 class="card-title flex-grow-1">{{courses.name}}</h5>
+                  <a href="{% url 'course' courses.code %}" class="btn btn-primary w-100" style="background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%) !important; border-color: #2ebdb4 !important; color: white !important;">
+                     Enter Course
+                  </a>
+               </div>
+               <div class="card-footer">
+                  <small style="font-weight: 500;">
+                     Instructor: 
+                     {% if courses.faculty %}
+                        {{ courses.faculty.name}}
+                     {% else %}
+                        Not assigned
+                     {% endif %}
+                  </small>
+               </div>
             </div>
          </div>
-         <!-- individual course ends -->
          {% endfor %}
-         <!-- Course container ends -->
       </div>
       {% else %}
-      <div class="text-center fs-5 text-secondary">
-         <p>You are not enrolled in any courses</p>
+      <!-- Empty State -->
+      <div class="text-center" style="background: white; border-radius: 16px; padding: 4rem; box-shadow: 0 8px 32px rgba(5, 22, 34, 0.08);">
+         <div style="width: 80px; height: 80px; background: rgba(46, 189, 180, 0.1); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+            <svg width="40" height="40" fill="none" stroke="var(--primary-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+               <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+               <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+         </div>
+         <h4 style="color: var(--primary-dark); font-weight: 700; margin-bottom: 0.75rem;">No Courses Enrolled</h4>
+         <p style="color: #64748b; margin-bottom: 2rem;">Start your learning journey by enrolling in courses</p>
+         <a href="{% url 'courses' %}" class="btn btn-primary" style="padding: 1rem 2.5rem; background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%) !important; border-color: #2ebdb4 !important; color: white !important;">
+            Browse Available Courses
+         </a>
       </div>
       {% endif %}
    </div>

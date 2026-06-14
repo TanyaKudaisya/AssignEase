@@ -96,6 +96,26 @@ def myCourses(request):
         return render(request, 'error.html')
 
 
+# Calendar view for students
+def calendar_view(request):
+    try:
+        if request.session.get('student_id'):
+            student = Student.objects.get(
+                student_id=request.session['student_id'])
+            courses = student.course.all()
+            
+            context = {
+                'courses': courses,
+                'student': student,
+            }
+            
+            return render(request, 'main/calendar.html', context)
+        else:
+            return redirect('std_login')
+    except:
+        return render(request, 'error.html')
+
+
 # Display all courses (faculty view)
 def facultyCourses(request):
     try:

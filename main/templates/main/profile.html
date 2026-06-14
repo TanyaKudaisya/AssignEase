@@ -1,5 +1,5 @@
 {% extends 'index.html' %}
-{% block title %}{{student.name}} | eLMS{% endblock title %}
+{% block title %}{{student.name}} | AssignEase{% endblock title %}
 {% block profile %}
 {% url 'profile' student.student_id %}
 {% endblock %}
@@ -16,49 +16,85 @@
 {% url 'departments' %}
 {% endblock %}
 {% block content %}
-{% if messages %}
-{% for message in messages %}
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-   {{ message }}
-   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% endfor %}
-{% endif %}
-<!--navigation links-->
-<div class="container shadow-sm">
-   <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-      <ol class="breadcrumb p-3">
-         <li class="breadcrumb-item active animate__animated animate__backInRight" aria-current="page">Profile</li>
-      </ol>
-   </nav>
-</div>
-<div class="container shadow">
-   <div class="row">
-      <div class="col-12">
-         <div class="fw-bold fs-5 my-3 text-muted d-flex justify-content-center">
-            <p>Student info</p>
+<div class="container" style="padding: 2rem 0;">
+   {% if messages %}
+   {% for message in messages %}
+   <div class="alert alert-dismissible fade show" role="alert" style="background: linear-gradient(135deg, rgba(46, 189, 180, 0.1) 0%, rgba(46, 189, 180, 0.05) 100%); border: 2px solid var(--primary-teal); border-radius: 12px; color: var(--primary-dark);">
+      <strong>{{ message }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div>
+   {% endfor %}
+   {% endif %}
+
+   <!-- Breadcrumb -->
+   <div class="shadow-sm mb-4">
+      <nav style="--bs-breadcrumb-divider: '›';" aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'myCourses' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+         </ol>
+      </nav>
+   </div>
+
+   <!-- Profile Card -->
+   <div class="row justify-content-center">
+      <div class="col-lg-8">
+         <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(5, 22, 34, 0.1);">
+            <!-- Header -->
+            <div style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark-blue-alt) 100%); padding: 2rem; text-align: center; position: relative;">
+               <div style="background: white; width: 140px; height: 140px; border-radius: 50%; padding: 8px; margin: 0 auto 1rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);">
+                  <img src="/media/{{student.photo}}" alt="Profile Picture" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+               </div>
+               <h3 style="color: white; font-weight: 700; margin: 0;">{{student.name}}</h3>
+               <p style="color: rgba(255, 255, 255, 0.8); margin: 0.5rem 0 0 0;">Student Profile</p>
+            </div>
+
+            <!-- Profile Information -->
+            <div style="padding: 2.5rem;">
+               <h5 style="color: var(--primary-dark); font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #e2e8f0;">Personal Information</h5>
+               
+               <div class="row g-4">
+                  <div class="col-md-6">
+                     <div style="background: rgba(46, 189, 180, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--primary-teal);">
+                        <div style="color: #64748b; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Student ID</div>
+                        <div style="color: var(--primary-dark); font-size: 1.25rem; font-weight: 700;">{{student.student_id}}</div>
+                     </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                     <div style="background: rgba(46, 189, 180, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--primary-teal);">
+                        <div style="color: #64748b; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Department</div>
+                        <div style="color: var(--primary-dark); font-size: 1.25rem; font-weight: 700;">{{student.department}}</div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-6">
+                     <div style="background: rgba(46, 189, 180, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--primary-teal);">
+                        <div style="color: #64748b; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Full Name</div>
+                        <div style="color: var(--primary-dark); font-size: 1.25rem; font-weight: 700;">{{student.name}}</div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Action Buttons -->
+               <div class="row g-3 mt-4">
+                  <div class="col-md-6">
+                     <a href="{% url 'changePasswordPrompt' %}" class="btn btn-outline-dark w-100">
+                        Change Password
+                     </a>
+                  </div>
+                  <div class="col-md-6">
+                     <a href="{% url 'changePhotoPrompt' %}" class="btn btn-primary w-100" style="background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%) !important; border-color: #2ebdb4 !important; color: white !important;">
+                        Change Profile Picture
+                     </a>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
    </div>
-   <div class="d-flex flex-column align-items-center">
-      <div class="my-3">
-         <img src="/media/{{student.photo}}" alt="image" class="rounded-circle" style="height: 10rem ; width:10rem">
-      </div>
-      <div class="my-3">
-         <h5>Name : {{student.name}}</h5>
-         <h5>ID : <span class="mx-3 px-1"></span>{{student.student_id}}</h5>
-         <h5>Dept :<span class="mx-2"> {{student.department}}</h5>
-      </div>
-   </div>
-   <div class="d-flex justify-content-center">
-      <a href="{% url 'changePasswordPrompt'  %}" class="btn btn-sm btn-primary border my-2 mx-1">
-      Change Password
-      </a>
-      <a href="{% url 'changePhotoPrompt'  %}" class="btn btn-sm btn-primary border my-2 mx-1">
-      Change Profile Picture      
-      </a>
-   </div>
 </div>
+
 <script>
    setTimeout(function() {
       $('.alert').alert('close');

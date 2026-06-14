@@ -17,10 +17,10 @@
 <div class="container shadow-sm">
    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb p-3">
-         <li class="breadcrumb-item fw-bold"><a style="color: rgb(10, 10, 48)" href="{% url 'myCourses' %}">My
+         <li class="breadcrumb-item fw-bold"><a style="color: var(--primary-dark)" href="{% url 'myCourses' %}">My
             Courses</a>
          </li>
-         <li class="breadcrumb-item fw-bold"><a style="color: rgb(10, 10, 48)"
+         <li class="breadcrumb-item fw-bold"><a style="color: var(--primary-dark)"
             href="{% url 'course' course.code %}">{{ course.name }}</a></li>
          <li class="breadcrumb-item active animate__animated animate__backInRight" aria-current="page">Assignment <span>
             ({{ assignment.title }})</span> 
@@ -79,7 +79,7 @@
          </div>
          <p class="text-center" id="fileError"></p>
          <div class="btn-container d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary px-5 shadow-sm rounded">Submit</button><span
+            <button type="submit" class="btn btn-primary px-5 shadow-sm rounded" style="background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%) !important; border-color: #2ebdb4 !important; color: white !important;">Submit</button><span
                class="p-2"></span>
          </div>
       </div>

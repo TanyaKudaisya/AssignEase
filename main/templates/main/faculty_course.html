@@ -27,7 +27,7 @@
 <div class="container shadow-sm">
    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb p-3">
-         <li class="breadcrumb-item fw-bold"><a style="color: rgb(10, 10, 48)"
+         <li class="breadcrumb-item fw-bold"><a style="color: var(--primary-dark)"
             href="{% url 'facultyCourses' %}">My Courses</a></li>
          <li class="breadcrumb-item fw-bold animate__animated animate__backInRight"><a class="breadcrumb-item active"
             aria-current="page">{{ course.name }}</a></li>
@@ -78,7 +78,7 @@
    <!-- announcement section starts -->
    <div class="rounded p-3 m-3 shadow border border-top-0 border-end-0 border-bottom-0 border-primary border-5">
       <div class="animate__animated animate__zoomInDown d-flex justify-content-between border-bottom border-1 mb-2">
-         <h5 class="fw-bold" style="color: rgb(10, 10, 48);"><img src="{% static 'images/icon/megaphone.png' %}"
+         <h5 class="fw-bold" style="color: var(--primary-dark);"><img src="{% static 'images/icon/megaphone.png' %}"
             alt="" style="height:1.5rem; vertical-align: text-bottom;"><span style="margin-right: 0.6rem;"></span>Announcement
          </h5>
          <a
@@ -115,8 +115,7 @@
                         <div class="modal-footer" style="border:none">
                            <button type="button" data-bs-dismiss="modal"
                               class="btn btn-sm ">Cancel</button>
-                           <a class="btn btn-sm btn-primary"
-                              href="{% url 'deleteAnnouncement' course.code announcement.id %}">Confirm</a>
+                           <a class="btn btn-sm btn-primary" href="{% url 'deleteAnnouncement' course.code announcement.id %}" style="background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%) !important; border-color: #2ebdb4 !important; color: white !important;">Confirm</a>
                         </div>
                      </div>
                   </div>
@@ -145,7 +144,7 @@
    <!-- assignment section starts -->
    <div class="rounded p-3 m-3 shadow border border-top-0 border-bottom-0 border-end-0 border-danger border-5">
       <div class="animate__animated animate__zoomInLeft d-flex flex-row justify-content-between edit border-bottom border-1 mb-2">
-         <h5 class="fw-bold assignmentCls" style="color: rgb(10, 10, 48);"><img src="{% static 'images/icon/open-book.png' %}"
+         <h5 class="fw-bold assignmentCls" style="color: var(--primary-dark);"><img src="{% static 'images/icon/open-book.png' %}"
             alt="" style="height:1.5rem; vertical-align: top"><span style="margin-right: 0.6rem;"></span>Assignment</h5>
          <a style="height:2rem"
             href="{% url 'addAssignment' course.code %}">
@@ -184,7 +183,7 @@
    <!-- course material section starts -->
    <div class="rounded p-3 m-3 shadow border border-top-0 border-bottom-0 border-warning border-end-0 border-5" id="material">
       <div class="d-flex flex-row justify-content-between edit border-bottom border-1 mb-2 animate__animated animate__zoomInUp">
-         <h5 class="fw-bold" style="color: rgb(10, 10, 48);"><img src="{% static 'images/icon/folder.png' %}"
+         <h5 class="fw-bold" style="color: var(--primary-dark);"><img src="{% static 'images/icon/folder.png' %}"
             alt="" style="height:1.5rem; vertical-align: top"><span style="margin-right: 0.6rem;"></span>Course Material</h5>
          <a
             href="{% url 'addCourseMaterial' course.code  %}"><img src="{% static 'images/icon/iconBlack.png' %}"
@@ -195,7 +194,7 @@
          <!-- individual material starts -->
          <div class="fs-6 text-break mb-2">{% autoescape off %}{{material.description}}{% endautoescape %}</div>
          {% if  material.file %}
-         <a class="fw-bold" href="{{ material.file.url }}"><span style="color:#9400d3" id="materialName">File : {{material.file.name}}</span></a><br>
+         <a class="fw-bold" href="{{ material.file.url }}"><span style="color: var(--primary-teal)" id="materialName">File : {{material.file.name}}</span></a><br>
          {% endif %}
          <!-- Popup -->
          <div class="modal fade" id="materialDel{{material.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -212,8 +211,7 @@
                   <div class="modal-footer" style="border:none">
                      <button type="button" class="btn btn-sm "
                         data-bs-dismiss="modal">Cancel</button>
-                     <a class="btn btn-sm btn-primary"
-                        href="{% url 'deleteCourseMaterial' course.code material.id %}">Confirm</a>
+                     <a class="btn btn-sm btn-primary" href="{% url 'deleteCourseMaterial' course.code material.id %}" style="background: linear-gradient(135deg, #2ebdb4 0%, #26a69a 100%) !important; border-color: #2ebdb4 !important; color: white !important;">Confirm</a>
                   </div>
                </div>
             </div>
