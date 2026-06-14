@@ -106,7 +106,8 @@ class Command(BaseCommand):
                 studentKey=1234,
                 facultyKey=5678
             )
-            course.student.add(student)
+            # Add student to course (from student side)
+            student.course.add(course)
             self.stdout.write(self.style.SUCCESS(
                 f'✅ Created sample course: {course.name}'
             ))

@@ -57,8 +57,9 @@ def create_initial_data(apps, schema_editor):
             studentKey=1234,
             facultyKey=5678
         )
-        course.student.add(student)
-        print(f'✅ Course created: CS101')
+        # Add student to course (from student side, not course side)
+        student.course.add(course)
+        print(f'✅ Course created: 101')
         print('🎉 Initial data setup complete!')
 
 
