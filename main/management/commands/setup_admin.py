@@ -11,7 +11,24 @@ import os
 class Command(BaseCommand):
     help = 'Creates initial admin user and optionally sample data'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--reset',
+            action='store_true',
+            help='Delete existing sample data and recreate with correct IDs',
+        )
+
     def handle(self, *args, **kwargs):
+        reset = kwargs.get('reset', False)
+        
+        # If reset flag is set, delete old sample data
+        if reset:
+            self.stdout.write(self.style.WARNING('🔄 Resetting sample data...'))
+            Faculty.objects.filter(faculty_id__in=['FAC001', '1001']).delete()
+            Student.objects.filter(student_id__in=['STU001', '2001']).delete()
+            Course.objects.filter(code='CS101').delete()
+            self.stdout.write(self.style.SUCCESS('✅ Old sample data deleted'))
+        
         # Create superuser if it doesn't exist
         username = os.environ.get('ADMIN_USERNAME', 'admin')
         email = os.environ.get('ADMIN_EMAIL', 'admin@assignease.com')
