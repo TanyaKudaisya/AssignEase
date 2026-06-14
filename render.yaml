@@ -2,7 +2,7 @@ services:
   - type: web
     name: assignease
     runtime: python
-    buildCommand: "chmod +x build.sh && ./build.sh"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate"
     startCommand: "gunicorn assignease.wsgi:application"
     envVars:
       - key: DATABASE_URL
